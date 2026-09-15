@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Foundly · Manage Your Report</title>
+  <link rel="icon" type="image/png" href="foundly-logo-2(preview).png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="foundly.css">
+  <style>
+    .search-btn, .submit-btn { background: #0ea5a4; }
+    .search-btn:hover, .submit-btn:hover { background: #0b8483; }
+    .page-hero.edit-hero { background: linear-gradient(105deg, #0ea5a4 0%, #14213d 100%); }
+
+    .edit-panel {
+      background: white; border-radius: var(--radius-md); box-shadow: var(--shadow-sm);
+      padding: 32px; max-width: 640px; margin: 0 auto 48px;
+    }
+    .edit-panel-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; flex-wrap: wrap; gap: 12px; }
+    .edit-panel-header h2 { font-size: 22px; margin: 0; }
+    .edit-actions { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 20px; }
+    .edit-actions .btn { flex: 1; min-width: 160px; justify-content: center; }
+
+    .state-card {
+      max-width: 520px; margin: 40px auto 60px; background: white; border-radius: var(--radius-md);
+      box-shadow: var(--shadow-sm); padding: 48px 32px; text-align: center;
+    }
+    .state-card i { font-size: 40px; color: var(--gray); margin-bottom: 16px; display: block; }
+    .state-card.error i { color: var(--danger); }
+    .state-card h2 { margin-bottom: 8px; }
+    .state-card p { color: var(--gray); margin-bottom: 20px; }
+  </style>
+</head>
+<body data-page="edit">
+<header class="site-header">
+<div class="container">
+  <nav class="navbar">
+    <a href="index.html" class="logo">
+      <img id="foundly-logo-top" src="GCTU-Logo-640x640.webp" alt="Foundly illustration" onerror="this.style.display='none'">
+      <span>GCTU Foundly</span>
+    </a>
+    <div class="nav-buttons">
+      <a href="index.html" class="btn btn-outline"><i class="fas fa-home"></i> Home</a>
+    </div>
+  </nav>
+  </div>
+</header>
+<div class="container">
+
+  <section class="page-hero edit-hero">
+    <div class="page-hero-content">
+      <h1><i class="fas fa-pen-to-square" style="margin-right:12px;opacity:0.9"></i>Manage Your Report</h1>
+      <p>Edit, resolve, or remove your report using the private link you were given.</p>
+    </div>
+  </section>
+
+  <div class="state-card" id="loadingState">
+    <i class="fas fa-spinner fa-spin"></i>
+    <h2>Loading your report…</h2>
+  </div>
+
+  <div class="state-card error" id="invalidState" style="display:none">
+    <i class="fas fa-triangle-exclamation"></i>
+    <h2>This link isn't valid</h2>
+    <p>Make sure you're using the exact link from your confirmation email — it should include both an <code>id</code> and a <code>token</code>.</p>
+    <a href="index.html" class="btn btn-primary"><i class="fas fa-home"></i> Back to Foundly</a>
+  </div>
+
+  <div class="edit-panel" id="editPanel" style="display:none">
+    <div class="edit-panel-header">
+      <h2>Edit Report</h2>
+      <span class="status-pill" id="statusPill">Active</span>
+    </div>
+
+    <div id="lockedNotice" style="display:none;background:rgba(249,65,68,0.08);color:var(--danger);padding:14px 16px;border-radius:var(--radius-sm);margin-bottom:20px;font-size:14px">
+      <i class="fas fa-circle-info"></i> <span id="lockedNoticeText"></span>
+    </div>
+
+    <form id="editForm">
+      <div class="form-group">
+        <label>Title *</label>
+        <input type="text" id="editTitle" required>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Category *</label>
+          <select id="editCategory" required></select>
+        </div>
+        <div class="form-group">
+          <label>Location *</label>
+          <input type="text" id="editLocation" required>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Description *</label>
+        <textarea rows="4" id="editDescription" required></textarea>
+      </div>
+      <div class="form-group">
+        <label>Contact Email *</label>
+        <input type="email" id="editContact" required>
+      </div>
+
+      <button type="submit" class="submit-btn" id="saveBtn">
+        <i class="fas fa-save"></i> Save Changes
+      </button>
+
+      <div class="edit-actions">
+        <button type="button" class="btn btn-outline" id="resolveBtn" onclick="handleResolve()">
+          <i class="fas fa-circle-check"></i> Mark as Resolved
+        </button>
+        <button type="button" class="btn" style="background:var(--danger);color:white" id="deleteBtn" onclick="handleDelete()">
+          <i class="fas fa-trash"></i> Delete Report
+        </button>
+      </div>
+    </form>
+  </div>
+
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-col">
+        <a href="index.html" class="logo" style="margin-bottom:20px">
+          <img id="foundly-logo-top" src="foundly-logo-2(preview).png" alt="Foundly illustration" onerror="this.style.display='none'">
+          <span>GCTU Foundly</span>
+        </a>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <ul class="footer-links">
+          <li><span><i class="fas fa-envelope" style="margin-right:8px"></i>foundlyapp@gmail.com</span></li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<script type="module" src="js/edit.js"></script>
+</body>
+</html>
