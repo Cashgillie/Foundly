@@ -1619,7 +1619,7 @@ body {
 }
 .eyebrow-badge.teal { background: rgba(6,182,212,0.12); color: #0891b2; }
 
-.section-intro-row { display: flex; justify-content: space-between; align-items: flex-start; gap: 32px; flex-wrap: wrap; margin: 80px 0px; }
+.section-intro-row { display: flex; justify-content: space-between; align-items: flex-start; gap: 32px; flex-wrap: wrap; margin-bottom: 8px; }
 .section-intro-row h1 { font-size: 38px; font-weight: 800; line-height: 1.2; max-width: 560px; }
 .section-intro-row .section-intro-side { color: #6c757d; font-size: 15px; max-width: 380px; line-height: 1.7; padding-top: 8px; }
 
@@ -1702,3 +1702,18 @@ body[data-page="home"] {
 }
 @keyframes successCircle { to { stroke-dashoffset: 0; } }
 @keyframes successCheck  { to { stroke-dashoffset: 0; } }
+
+/* ---------- PAGE GATE LOADER (prevents a flash of protected content) ---------- */
+/* Plain HTML + CSS, no JS dependency — shows the instant the browser paints,
+   covering the real page while site-nav.js checks auth state. Removed once
+   it's confirmed safe to show the page (never removed if we're redirecting). */
+.page-gate-loader {
+  position: fixed; inset: 0; z-index: 9999; background: #f5f7fb;
+  display: flex; align-items: center; justify-content: center;
+  transition: opacity 0.2s ease;
+}
+.page-gate-spinner {
+  width: 44px; height: 44px; border: 4px solid #e0e3f5; border-top-color: var(--primary);
+  border-radius: 50%; animation: pageGateSpin 0.8s linear infinite;
+}
+@keyframes pageGateSpin { to { transform: rotate(360deg); } }

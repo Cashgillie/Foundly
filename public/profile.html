@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -72,6 +72,98 @@
       <div class="form-group">
         <label>Confirm New Password *</label>
         <input type="password" id="confirmNewPassword" placeholder="Re-enter new password" minlength="6" required>
+      </div>
+      <button type="submit" class="submit-btn" id="passwordSaveBtn"><i class="fas fa-key"></i> Update Password</button>
+    </form>
+  </div>
+
+  <div class="profile-card" style="text-align:center">
+    <a href="my-reports.html" class="btn btn-primary" style="width:100%;justify-content:center">
+      <i class="fas fa-clipboard-list"></i> View My Reports
+    </a>
+  </div>
+</div>
+<script type="module" src="js/profile.js"></script>
+</body>
+</html> -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Foundly · My Profile</title>
+  <link rel="icon" type="image/png" href="foundly-logo-2(preview).png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="foundly.css">
+</head>
+<body data-page="profile">
+<div class="page-gate-loader" id="pageGateLoader"><div class="page-gate-spinner"></div></div>
+<header class="site-header">
+<div class="container">
+  <nav class="navbar">
+    <a href="index.html" class="logo">
+      <img id="foundly-logo-top" src="GCTU-Logo-640x640.webp" alt="Foundly illustration" onerror="this.style.display='none'">
+      <span>GCTU Foundly</span>
+    </a>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="index.html?type=lost">Lost</a>
+      <a href="index.html?type=found">Found</a>
+      <a href="index.html?type=bookmarks">Bookmarks</a>
+    </div>
+    <div class="nav-buttons">
+      <a href="index.html?report=1" class="btn btn-report-lost"><i class="fas fa-triangle-exclamation"></i> Report Lost</a>
+      <a href="my-reports.html" class="btn btn-outline"><i class="fas fa-clipboard-list"></i> My Reports</a>
+      <button class="btn" id="navLogoutBtn" style="background:var(--danger);color:white;border:none">
+        <i class="fas fa-sign-out-alt"></i> Logout
+      </button>
+    </div>
+  </nav>
+  </div>
+</header>
+<div class="container">
+
+  <div style="margin:32px 0 8px;text-align:center">
+    <div class="profile-avatar" id="profileAvatar"><i class="fas fa-user"></i></div>
+  </div>
+
+  <div class="profile-card">
+    <h3><i class="fas fa-id-card" style="color:var(--primary);margin-right:8px"></i>Account Details</h3>
+    <div class="auth-error" id="profileError"></div>
+    <div class="auth-success" id="profileSuccess"></div>
+    <form id="profileForm">
+      <div class="form-group">
+        <label>Email</label>
+        <input type="email" id="profileEmail" disabled style="background:#f8f9fb;color:var(--gray)">
+      </div>
+      <div class="form-group">
+        <label>Full Name</label>
+        <input type="text" id="profileFullName" placeholder="Your name">
+      </div>
+      <div class="form-group">
+        <label>Phone</label>
+        <input type="tel" id="profilePhone" placeholder="024 000 0000">
+      </div>
+      <button type="submit" class="submit-btn" id="profileSaveBtn"><i class="fas fa-save"></i> Save Changes</button>
+    </form>
+  </div>
+
+  <div class="profile-card">
+    <h3><i class="fas fa-lock" style="color:var(--primary);margin-right:8px"></i>Change Password</h3>
+    <div class="auth-error" id="passwordError"></div>
+    <div class="auth-success" id="passwordSuccess"></div>
+    <form id="passwordForm">
+      <div class="form-group">
+        <label>New Password *</label>
+        <input type="password" id="newPassword" placeholder="At least 8 characters" minlength="8" required>
+        <small style="color:var(--gray);display:block;margin-top:4px">Needs an uppercase letter and a special character too (e.g. ! @ # $ %).</small>
+      </div>
+      <div class="form-group">
+        <label>Confirm New Password *</label>
+        <input type="password" id="confirmNewPassword" placeholder="Re-enter new password" minlength="8" required>
       </div>
       <button type="submit" class="submit-btn" id="passwordSaveBtn"><i class="fas fa-key"></i> Update Password</button>
     </form>
