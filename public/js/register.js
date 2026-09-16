@@ -143,15 +143,16 @@ document.getElementById('registerForm').addEventListener('submit', async (e) => 
 
   try {
     const data = await registerUser({ email, password, fullName, phone });
-    const welcomeMessage = fullName ? `Welcome, ${fullName}!` : 'Welcome to Foundly!';
 
     if (data.session) {
       // Email confirmation is off — the user is signed in immediately.
+      const welcomeMessage = fullName ? `Welcome, ${fullName}!` : 'Welcome to Foundly!';
       await showSuccessOverlay(welcomeMessage);
       window.location.href = `how-it-works.html?next=${encodeURIComponent(next)}`;
     } else {
-      // Email confirmation is required before they can log in.
-      await showSuccessOverlay(welcomeMessage);
+      // Email confirmation is required before they can log in — do NOT
+      // welcome them in, they're not actually signed in yet.
+      await showSuccessOverlay('Almost there!');
       successEl.textContent = 'Account created! Check your email to confirm it, then log in.';
       successEl.classList.add('show');
       document.getElementById('registerForm').reset();

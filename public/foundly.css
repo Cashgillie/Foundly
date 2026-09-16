@@ -265,6 +265,26 @@ body {
   box-shadow: 0 14px 30px rgba(0,0,0,0.28);
 }
 
+.homebtn a {
+  background: white;
+  color: var(--primary);
+  border: none;
+  padding: 14px 32px;
+  font-size: 16px;
+  box-shadow: 0 10px 24px rgba(0,0,0,0.25);
+}
+
+.homebtn a:hover {
+  background: var(--primary);
+  color: white;
+  border: none;
+  padding: 14px 32px;
+  font-size: 16px;
+  box-shadow: 0 10px 24px rgba(0,0,0,0.25);
+  transform: scale(1.2);
+  transition: 0.3s;
+}
+
 .hero-stats {
   display: flex;
   gap: 40px;
@@ -1619,7 +1639,7 @@ body {
 }
 .eyebrow-badge.teal { background: rgba(6,182,212,0.12); color: #0891b2; }
 
-.section-intro-row { display: flex; justify-content: space-between; align-items: flex-start; gap: 32px; flex-wrap: wrap; margin: 120px 0px; }
+.section-intro-row { display: flex; justify-content: space-between; align-items: flex-start; gap: 32px; flex-wrap: wrap; margin: 120px 0px 50px; }
 .section-intro-row h1 { font-size: 38px; font-weight: 800; line-height: 1.2; max-width: 560px; }
 .section-intro-row .section-intro-side { color: #6c757d; font-size: 15px; max-width: 380px; line-height: 1.7; padding-top: 8px; }
 
