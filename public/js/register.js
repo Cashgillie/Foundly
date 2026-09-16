@@ -152,7 +152,7 @@ document.getElementById('registerForm').addEventListener('submit', async (e) => 
     } else {
       // Email confirmation is required before they can log in — do NOT
       // welcome them in, they're not actually signed in yet.
-      await showSuccessOverlay('Almost there!');
+      await showSuccessOverlay('Almost there! Account created! Check your email to confirm it, then log in', 4000);
       successEl.textContent = 'Account created! Check your email to confirm it, then log in.';
       successEl.classList.add('show');
       document.getElementById('registerForm').reset();

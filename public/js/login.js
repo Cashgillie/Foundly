@@ -82,7 +82,7 @@ document.getElementById('loginForm').addEventListener('submit', async (e) => {
 
   try {
     await loginUser(email, password);
-    await showSuccessOverlay('Welcome back!');
+    await showSuccessOverlay('Welcome back!',4000);
     window.location.href = `how-it-works.html?next=${encodeURIComponent(next)}`;
   } catch (err) {
     errorEl.textContent = err.message || 'Could not log in. Check your email and password.';
