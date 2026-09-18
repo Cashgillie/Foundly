@@ -148,7 +148,7 @@ document.getElementById('registerForm').addEventListener('submit', async (e) => 
       // Email confirmation is off — the user is signed in immediately.
       const welcomeMessage = fullName ? `Welcome, ${fullName}!` : 'Welcome to Foundly!';
       await showSuccessOverlay(welcomeMessage);
-      window.location.href = `how-it-works.html?next=${encodeURIComponent(next)}`;
+      window.location.href = next;
     } else {
       // Email confirmation is required before they can log in — do NOT
       // welcome them in, they're not actually signed in yet.
